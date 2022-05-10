@@ -31,14 +31,40 @@ import DataTable from "examples/Tables/DataTable";
 import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
 
+import { useState, useEffect } from "react";
+import { db } from "../../firebase-config";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc, 
+  query, 
+  where
+} from "firebase/firestore";
+import "./index.css";
+
 function Tables() {
+  const [users, setUsers] = useState([]);
+  const usersCollectionRef = query(collection(db, "Donations"), where("Hash", "==", "0xE20745d80FF1773E1Fd0a08cc9E30501C69a3eb3"));
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getUsers();
+  }, []);
+
   const { columns, rows } = authorsTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox pt={6} pb={3}>
+      {/* <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
@@ -95,7 +121,28 @@ function Tables() {
             </Card>
           </Grid>
         </Grid>
-      </MDBox>
+      </MDBox> */}
+      <div className="container">
+            <h1>Your Donations</h1>
+            <table id="customers">
+                <thead>
+                <tr>
+                    <th>Camp</th>
+                    <th>Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {
+                        users.map((user) => (
+                            <tr key={user.id}>
+                                <td>{user.Camp}</td>
+                                <td>{user.Amount}</td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+        </div>
       <Footer />
     </DashboardLayout>
   );
