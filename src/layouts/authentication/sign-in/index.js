@@ -41,10 +41,35 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
+import {
+  collection, 
+  addDoc,
+  query,
+  where,
+  getDocs
+} from "firebase/firestore";
+import { db } from "../../../firebase-config";
+
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+
+  const [users, setUsers] = useState([]);
+  const usersCollectionRef = query(collection(db, "Donaters"), where("Email", "==", email));
+
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    const checkusers = () =>{
+      getUsers();
+      getUsers();
+      console.log(users.length);
+    }
+  
 
   return (
     <BasicLayout image={bgImage}>
@@ -84,10 +109,12 @@ function Basic() {
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <MDInput type="email" label="Email" fullWidth />
+              <MDInput type="email" label="Email" fullWidth onChange={(event) => {
+          setEmail(event.target.value);}}/>
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="password" label="Password" fullWidth />
+              <MDInput type="password" label="Password" fullWidth onChange={(event) => {
+          setPassword(event.target.value);}}/>
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
@@ -102,7 +129,7 @@ function Basic() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth>
+              <MDButton variant="gradient" color="info" fullWidth onClick={checkusers}>
                 sign in
               </MDButton>
             </MDBox>
