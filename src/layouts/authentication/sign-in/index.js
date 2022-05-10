@@ -41,10 +41,37 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
+import {
+  collection, 
+  addDoc,
+  query,
+  where,
+  getDocs
+} from "firebase/firestore";
+import { db } from "../../../firebase-config";
+import  { Redirect } from 'react-router-dom'
+
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    const checkusers = () =>{
+      getUsers();
+      console.log(users.length);
+      if(users.length==1) {
+        //this.props.history.push("../../dashboard/index.js")
+        return <Redirect to='../../dashboard/index.js'  />
+
+      }
+      else{
+        alert("User Doesnt Exist");
+      }
+    }
+  
 
   return (
     <BasicLayout image={bgImage}>
