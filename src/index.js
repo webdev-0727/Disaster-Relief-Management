@@ -24,13 +24,15 @@ import App from "./App";
 
 
 
+import Transactions from "./layouts/tables/transactions"
+import { TransactionsProvider } from "./context/TransactionContext";
 
 ReactDOM.render(
   <BrowserRouter>
     <MaterialUIControllerProvider>
-   
+    <TransactionsProvider>
       <App />
-     
+      </TransactionsProvider>
     </MaterialUIControllerProvider>
   </BrowserRouter>,
   document.getElementById("root")
