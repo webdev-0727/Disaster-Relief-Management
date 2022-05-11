@@ -65,9 +65,19 @@ function Basic() {
     };
 
     const checkusers = () =>{
-      getUsers();
+      
       getUsers();
       console.log(users.length);
+      if(users.length==1) {
+        //this.props.history.push("../../dashboard/index.js")
+        //return <Redirect to='../../dashboard/index.js'  />
+        //return <Redirect to='../../dashboard/index.js'  />
+        console.log("hii");
+
+      }
+      else{
+        alert("User Doesnt Exist");
+      }
     }
   
 

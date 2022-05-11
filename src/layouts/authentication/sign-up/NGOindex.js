@@ -16,7 +16,7 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 // Images
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 
-function Cover() {
+function Cover1() {
   return (
     <CoverLayout image={bgImage}>
       <Card>
@@ -41,17 +41,17 @@ function Cover() {
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <MDInput type="text" label="Name" variant="standard" fullWidth />
+              <MDInput type="text" label="NGO Name" variant="standard" fullWidth />
             </MDBox>
+
+            <MDBox mb={2}>
+              <MDInput type="email" label="NGO Unique ID" variant="standard" fullWidth />
+            </MDBox>
+
             <MDBox mb={2}>
               <MDInput type="email" label="Email" variant="standard" fullWidth />
             </MDBox>
-            <MDBox mb={2}>
-              <MDInput type="text" label="State" variant="standard" fullWidth />
-            </MDBox>
-            <MDBox mb={2}>
-              <MDInput type="text" label="District" variant="standard" fullWidth />
-            </MDBox>
+          
             <MDBox mb={2}>
               <MDInput type="password" label="Password" variant="standard" fullWidth />
             </MDBox>
@@ -106,4 +106,4 @@ function Cover() {
   );
 }
 
-export default Cover;
+export default Cover1;
