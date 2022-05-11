@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -31,7 +31,34 @@ import DataTable from "examples/Tables/DataTable";
 // Data
 import data from "layouts/dashboard/components/Projects/data";
 
+import { db } from "../../../../firebase-config";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc, 
+  query, 
+  where
+} from "firebase/firestore";
+import { Button } from "@mui/material";
+import "../../../tables/index.css";
 function Projects() {
+  const [users, setUsers] = useState([]);
+  const usersCollectionRef = query(collection(db, "Camps"), where("Completed", "==", false));
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      console.log(data);
+    };
+    
+    getUsers();
+    
+  }, []);
+
   const { columns, rows } = data();
   const [menu, setMenu] = useState(null);
 
@@ -89,13 +116,39 @@ function Projects() {
         {renderMenu}
       </MDBox>
       <MDBox>
-        <DataTable
+        {/* <DataTable
           table={{ columns, rows }}
           showTotalEntries={false}
           isSorted={false}
           noEndBorder
           entriesPerPage={false}
-        />
+        /> */}
+        <table id="customers">
+                <thead>
+                <tr>
+                    <th>Disaster</th>
+                    <th>Location</th>
+                    <th>No. of People Affected</th>
+                    <th>Amount Needed</th>
+                    <th>Amount Collected</th>
+                    <th>Donate</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {
+                        users.map((user) => (
+                            <tr key={user.id}>
+                                <td>{user.Disaster}</td>
+                                <td>{user.Location}</td>
+                                <td>{user.Count}</td>
+                                <td>{user.Amount}</td>
+                                <td>{user.Amount_Collected}</td>
+                                <td><Button>Donate</Button></td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
       </MDBox>
     </Card>
   );

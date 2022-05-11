@@ -45,8 +45,10 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import NGOindex from "layouts/authentication/sign-up/NGOindex";
+import CreateCamp from "layouts/authentication/sign-up/CreateCamp";
 // @mui icons
 import Icon from "@mui/material/Icon";
+import CampsCreated from "layouts/tables/CampsCreated";
 
 const routes = [
   {
@@ -120,6 +122,22 @@ const routes = [
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/sign-up/ngo",
     component: <NGOindex />,
+  },
+  {
+    type: "collapse",
+    name: "Create A Camp",
+    key: "create-camp",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/authentication/sign-up/create-camp",
+    component: <CreateCamp />,
+  },
+  {
+    type: "collapse",
+    name: "Camps Created",
+    key: "camps-created",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/tables/camps-created",
+    component: <CampsCreated />,
   },
 ];
 
