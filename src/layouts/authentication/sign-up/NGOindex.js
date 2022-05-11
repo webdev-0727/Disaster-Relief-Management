@@ -16,7 +16,47 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 // Images
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 
+import { useState } from "react";
+import {
+  collection, 
+  addDoc
+} from "firebase/firestore";
+import { db } from "../../../firebase-config";
+// import { NetworkWifiRounded } from "@mui/icons-material";
+
+
 function Cover1() {
+  const [newName, setNewName] = useState("");
+  const [newId, setNewId] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+
+  const usersCollectionRef = collection(db, "NGO");
+
+  const createNGO = async () => {
+    await addDoc(usersCollectionRef, { Name: newName, Id: newId, email: newEmail, password: newPassword });
+  };
+
+  // const updateUser = async (id, Age) => {
+  //   const userDoc = doc(db, "Donaters", id);
+  //   const newFields = { Age: Age + 1 };
+  //   await updateDoc(userDoc, newFields);
+  // };
+
+  // const deleteUser = async (id) => {
+  //   const userDoc = doc(db, "Donaters", id);
+  //   await deleteDoc(userDoc);
+  // };
+
+  // useEffect(() => {
+  //   const getUsers = async () => {
+  //     const data = await getDocs(usersCollectionRef);
+  //     setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  //   };
+
+  //   getUsers();
+  // }, []);
+
   return (
     <CoverLayout image={bgImage}>
       <Card>
@@ -41,19 +81,26 @@ function Cover1() {
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <MDInput type="text" label="NGO Name" variant="standard" fullWidth />
+              <MDInput type="text" label="NGO Name" variant="standard" fullWidth  onChange={(event) => {
+          setNewName(event.target.value);
+        }}/> 
+            </MDBox>
+            
+            <MDBox mb={2}>
+              <MDInput type="text" label="NGO Unique ID" variant="standard" fullWidth onChange={(event) => {
+          setNewId(event.target.value);
+        }}/>
+            </MDBox>
+          <MDBox mb={2}>
+              <MDInput type="email" label="Email" variant="standard" fullWidth onChange={(event) => {
+          setNewEmail(event.target.value);
+        }}/>
             </MDBox>
 
             <MDBox mb={2}>
-              <MDInput type="email" label="NGO Unique ID" variant="standard" fullWidth />
-            </MDBox>
-
-            <MDBox mb={2}>
-              <MDInput type="email" label="Email" variant="standard" fullWidth />
-            </MDBox>
-          
-            <MDBox mb={2}>
-              <MDInput type="password" label="Password" variant="standard" fullWidth />
+              <MDInput type="password" label="Password" variant="standard" fullWidth onChange={(event) => {
+          setNewPassword(event.target.value);
+        }}/>
             </MDBox>
             <MDBox mb={2}>
               <MDInput type="password" label="Confirm Password" variant="standard" fullWidth />
@@ -80,8 +127,8 @@ function Cover1() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth>
-                sign in
+              <MDButton variant="gradient" color="info" fullWidth onClick={createNGO}>
+                sign up
               </MDButton>
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">
@@ -89,13 +136,13 @@ function Cover1() {
                 Already have an account?{" "}
                 <MDTypography
                   component={Link}
-                  to="/authentication/sign-in"
+                  to="/authentication/sign-in/ngo-login"
                   variant="button"
                   color="info"
                   fontWeight="medium"
                   textGradient
                 >
-                  Sign In
+                  Sign in
                 </MDTypography>
               </MDTypography>
             </MDBox>

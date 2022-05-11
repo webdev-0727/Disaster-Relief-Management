@@ -45,6 +45,7 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import NGOindex from "layouts/authentication/sign-up/NGOindex";
+import NGOindexLogin from "layouts/authentication/sign-in/NGOindex";
 // @mui icons
 import Icon from "@mui/material/Icon";
 
@@ -120,6 +121,14 @@ const routes = [
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/sign-up/ngo",
     component: <NGOindex />,
+  },
+  {
+    type: "collapse",
+    name: "Sign In-NGO",
+    key: "sign-in-ngo",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/authentication/sign-in/ngo-login",
+    component: <NGOindexLogin />,
   },
 ];
 
