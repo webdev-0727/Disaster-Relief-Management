@@ -16,19 +16,23 @@ Coded by www.creative-tim.com
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import App from "App";
-
-// Material Dashboard 2 React Context Provider
 import { MaterialUIControllerProvider } from "context";
+import Cover from "./layouts/authentication/sign-up/index";
+import App from "./App";
+// import Cover from "./layouts/authentication/sign-up/NGOindex";
+// Material Dashboard 2 React Context Provider
 
 
+
+import Transactions from "./layouts/tables/transactions"
+import { TransactionsProvider } from "./context/TransactionContext";
 
 ReactDOM.render(
   <BrowserRouter>
     <MaterialUIControllerProvider>
-   
+    <TransactionsProvider>
       <App />
-     
+      </TransactionsProvider>
     </MaterialUIControllerProvider>
   </BrowserRouter>,
   document.getElementById("root")

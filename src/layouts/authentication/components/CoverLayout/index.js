@@ -21,6 +21,10 @@ import Grid from "@mui/material/Grid";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
+
+
+import MDTypography from "components/MDTypography";
+import { Link } from "react-router-dom";
 // import MDTypography from "components/MDTypography";
 
 // Material Dashboard 2 React example components
@@ -36,12 +40,15 @@ function CoverLayout({ coverHeight, image, children }) {
       <DefaultNavbar
         action={{
           type: "internal",
-          route: "./NGOindex.js",
+          route: "/authentication/sign-up/ngo",
           label: "Join As NGO",
         }}
         transparent
         light
       />
+
+      
+
       <MDBox
         width="calc(100% - 2rem)"
         minHeight={coverHeight}
