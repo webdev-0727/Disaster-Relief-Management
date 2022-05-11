@@ -57,7 +57,7 @@ function Basic() {
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   const [users, setUsers] = useState([]);
-  const usersCollectionRef = query(collection(db, "NGO"), where("Id", "==", Id, "&&", "password", "==", password));
+  const usersCollectionRef = query(collection(db, "NGO"), where("Id", "==", Id,), where("password", "==", password));
 
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);

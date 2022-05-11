@@ -48,6 +48,7 @@ import NGOindex from "layouts/authentication/sign-up/NGOindex";
 import NGOindexLogin from "layouts/authentication/sign-in/NGOindex";
 // @mui icons
 import Icon from "@mui/material/Icon";
+import { Welcome } from "components";
 
 const routes = [
   {
@@ -129,6 +130,14 @@ const routes = [
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/sign-in/ngo-login",
     component: <NGOindexLogin />,
+  },
+  {
+    type: "collapse",
+    name: "Transact",
+    key: "transact",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/transact/welcome",
+    component: <Welcome />,
   },
 ];
 
