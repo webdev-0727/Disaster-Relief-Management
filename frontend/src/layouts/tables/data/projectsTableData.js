@@ -31,8 +31,32 @@ import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
 import logoSlack from "assets/images/small-logos/logo-slack.svg";
 import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 import logoInvesion from "assets/images/small-logos/logo-invision.svg";
+import { useState, useEffect } from "react";
+import { db } from "../../../firebase-config";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 
 export default function data() {
+
+  const [users, setUsers] = useState([]);
+  const usersCollectionRef = collection(db, "Donaters");
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getUsers();
+
+  }, []);
+
   const Project = ({ image, name }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDAvatar src={image} name={name} size="sm" variant="rounded" />
@@ -54,9 +78,10 @@ export default function data() {
   );
 
   return {
+    
     columns: [
-      { Header: "project", accessor: "project", width: "30%", align: "left" },
-      { Header: "budget", accessor: "budget", align: "left" },
+      { Header: "Camp", accessor: "project", width: "30%", align: "left" },
+      { Header: "Donation", accessor: "budget", align: "left" },
       { Header: "status", accessor: "status", align: "center" },
       { Header: "completion", accessor: "completion", align: "center" },
       { Header: "action", accessor: "action", align: "center" },
@@ -179,4 +204,6 @@ export default function data() {
       },
     ],
   };
+  
+
 }

@@ -70,58 +70,6 @@ function CampsCreated() {
   const { columns, rows } = authorsTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
-  const TransactionsCard = ({ addressTo, addressFrom, timestamp, message, keyword, amount, url }) => {
-    //const gifUrl = useFetch({ keyword });
-  
-    return (
-      // <div className="bg-[#181918] m-4 flex flex-1
-      //   2xl:min-w-[450px]
-      //   2xl:max-w-[500px]
-      //   sm:min-w-[270px]
-      //   sm:max-w-[300px]
-      //   min-w-full
-      //   flex-col p-3 rounded-md hover:shadow-2xl"
-      // >
-        // <div className="flex flex-col items-center w-full mt-3">
-        //   <div className="display-flex justify-start w-full mb-6 p-2">
-        //     <a href={`https://ropsten.etherscan.io/address/${addressFrom}`} target="_blank" rel="noreferrer">
-        //       <p className="text-white text-base">From: {shortenAddress(addressFrom)}</p>
-        //     </a>
-        //     <a href={`https://ropsten.etherscan.io/address/${addressTo}`} target="_blank" rel="noreferrer">
-        //       <p className="text-white text-base">To: {shortenAddress(addressTo)}</p>
-        //     </a>
-        //     <p className="text-white text-base">Amount: {amount} ETH</p>
-        //     {message && (
-        //       <>
-        //         <br />
-        //         <p className="text-white text-base">Message: {message}</p>
-        //       </>
-        //     )}
-        //   </div> 
-          // <img
-          //   src={gifUrl || url}
-          //   alt="nature"
-          //   className="w-full h-64 2xl:h-96 rounded-md shadow-lg object-cover"
-          // /> 
-          // <div className="bg-black p-3 px-5 w-max rounded-3xl -mt-5 shadow-2xl">
-          //   <p className="text-[#37c7da] font-bold">{timestamp}</p>
-          // </div>
-          
-          
-                <tr>
-                    <td>{shortenAddress(addressFrom)}</td>
-                    <td>{shortenAddress(addressTo)}</td>
-                    <td>{amount}</td>
-                    <td>{message}</td>
-                    <td>{timestamp}</td>
-                    
-                  </tr>
-                        
-        //</div>
-      //</div>
-    );
-  };
-  const { transactions, currentAccount } = useContext(TransactionContext);
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -183,7 +131,7 @@ function CampsCreated() {
           </Grid>
         </Grid>
       </MDBox> */}
-      {/* <div className="container">
+      <div className="container">
             <h1>Your Donations</h1>
             <table id="customers">
                 <thead>
@@ -209,62 +157,10 @@ function CampsCreated() {
                     }
                 </tbody>
             </table>
-        </div> */}
-        <div className="flex w-full justify-center items-center 2xl:px-20 gradient-bg-transactions">
-      <div className="flex flex-col md:p-12 py-12 px-4">
-        {currentAccount ? (
-          <h3 className="text-white text-3xl text-center my-2">
-            Latest Transactions
-          </h3>
-        ) : (
-          <div>
-          <h3 className="text-white text-3xl text-center my-2">
-            Connect your account to see the latest transactions
-          </h3>
-          <Button onClick={connectWallet}>Connect</Button>
-          </div>
-        )}
-
-        <div className="flex flex-wrap justify-center items-center mt-10">
-        <table id="customers">
-                <thead>
-                <tr>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Amount</th>
-                    <th>Message</th>
-                    <th>Timestamp</th>
-                </tr>
-                </thead>
-                <tbody>
-          {[...transactions].reverse().map((transaction, i) => (
-            <TransactionsCard key={i} {...transaction} />
-          ))}
-             </tbody>
-            </table>
         </div>
-      </div>
-    </div>
       <Footer />
     </DashboardLayout>
   );
 }
 
-export default Tables;
-
-
-
-
-
-
-
-
-// const Transactions = () => {
-  
-
-//   return (
-    
-//   );
-// };
-
-// export default Transactions;
+export default CampsCreated;
