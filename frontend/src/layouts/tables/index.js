@@ -54,7 +54,7 @@ import { TransactionContext, connectWallet } from "../../context/TransactionCont
 //import dummyData from "../utils/dummyData";
 import { shortenAddress } from "../../utils/shortenAddress";
 
-function CampsCreated() {
+function Tables() {
   const [users, setUsers] = useState([]);
   const usersCollectionRef = query(collection(db, "Camps"), where("User", "==", "prag@gmail.com"));
 

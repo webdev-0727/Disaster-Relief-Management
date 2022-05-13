@@ -51,7 +51,7 @@ import CreateCamp from "layouts/authentication/sign-up/CreateCamp";
 // @mui icons
 import Icon from "@mui/material/Icon";
 import CampsCreated from "layouts/tables/CampsCreated";
-
+import Welcome from "./layouts/transact/Welcome";
 const routes = [
   {
     type: "collapse",
@@ -140,6 +140,9 @@ const routes = [
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/transact/welcome",
     component: <Welcome />,
+  },
+  {
+    type: "collapse",
     name: "Create A Camp",
     key: "create-camp",
     icon: <Icon fontSize="small">assignment</Icon>,

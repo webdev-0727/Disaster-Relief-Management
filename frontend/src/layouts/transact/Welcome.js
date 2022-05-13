@@ -5,7 +5,7 @@ import { BsInfoCircle } from "react-icons/bs";
 
 import { TransactionContext } from "../../context/TransactionContext";
 import { shortenAddress } from "../../utils/shortenAddress";
-import { Loader } from "../../components";
+//import { Loader } from "../../components";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
@@ -129,10 +129,6 @@ const Welcome = () => {
             <Input placeholder="Enter Message" name="message" type="text" handleChange={handleChange} />
 
             <div className="h-[1px] w-full bg-gray-400 my-2" />
-
-            {isLoading
-              ? <Loader />
-              : (
                 <button
                   type="button"
                   onClick={handleSubmit}
@@ -140,7 +136,6 @@ const Welcome = () => {
                 >
                   Send now
                 </button>
-              )}
           </div>
         </div>
       </div>
